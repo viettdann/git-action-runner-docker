@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  github-action:
+    image: github-runner
+    restart: always
+    network_mode: host
+    deploy:
+      mode: replicated
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ./data/runner_token.txt:/home/ubuntu/actions-runner/runner_token.txt
+      - ./data/_work:/home/ubuntu/actions-runner/_work
+      #- work_data:/home/ubuntu/actions-runner/_work
+    environment:
+       - OWNER=${OWNER}
+       - REPO=${REPO}
+       - ACCESS_TOKEN=${ACCESS_TOKEN}
+       - LABEL=${LABEL}
+    env_file:
+      - .env
+# volumes:
+#   work_data:
+#     name: github-runner-data

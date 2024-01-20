@@ -1,0 +1,5 @@
+.env
+*.env
+!development.env
+data/_work/*
+!data/_work/.gitkeep
