@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-ENV RUNNER_VER="2.312.0"
+ARG RUNNER_VER="2.312.0"
 
 # install jq so we can parse JSON add additional packages as necessary
 WORKDIR /home/ubuntu

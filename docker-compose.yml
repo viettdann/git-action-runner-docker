@@ -2,7 +2,12 @@ version: '3'
 
 services:
   github-action:
-    image: github-runner
+    #image: github-runner # if you prebuild it
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        - RUNNER_VER=2.312.0
     restart: always
     network_mode: host
     deploy:
@@ -18,7 +23,7 @@ services:
        - OWNER=${OWNER}
        - REPO=${REPO}
        - ACCESS_TOKEN=${ACCESS_TOKEN}
-       - LABEL=${LABEL}
+       - RUNNER_LABEL=${RUNNER_LABEL}
     env_file:
       - .env
 # volumes:

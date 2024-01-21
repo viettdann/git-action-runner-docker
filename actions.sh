@@ -5,7 +5,7 @@
 OWNER=$OWNER
 REPO=$REPO
 ACCESS_TOKEN=$ACCESS_TOKEN
-LABEL=$RUNNER_LABEL
+RUNNER_LABEL=$RUNNER_LABEL
 #check Runner Name, and generate if not
 RUNNER_NAME=${RUNNER_NAME:-$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)}
 
@@ -26,7 +26,7 @@ echo "Token: $RUNNER_TOKEN"
 
 #./config.sh remove --unattended --token "${RUNNER_TOKEN}" --name "$RUNNER_NAME"
 
-./config.sh --url "https://github.com/$OWNER/$REPO" --token "$RUNNER_TOKEN" --name "$RUNNER_NAME" --unattended --label "ubuntu:latest $LABEL"
+./config.sh --url "https://github.com/$OWNER/$REPO" --token "$RUNNER_TOKEN" --name "$RUNNER_NAME" --unattended --label "ubuntu:latest $RUNNER_LABEL"
 
 cleanup() {
     echo "Removing runner..."
