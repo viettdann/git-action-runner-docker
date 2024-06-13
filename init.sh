@@ -5,12 +5,11 @@
 OWNER=$OWNER
 REPO=$REPO
 ACCESS_TOKEN=$ACCESS_TOKEN
-RUNNER_LABEL=$RUNNER_LABEL
+LABEL=$RUNNER_LABEL
 #check Runner Name, and generate if not
 RUNNER_NAME=${RUNNER_NAME:-$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)}
 
 #RUNNER_TOKEN=$(curl -sX POST -H "Authorization: token $TOKEN" https://api.github.com/orgs/$GIT_ORG/actions/runners/registration-token | jq .token --raw-output)
-
 RUNNER_TOKEN_FILE="/home/ubuntu/actions-runner/runner_token.txt"
 if [ -s "$RUNNER_TOKEN_FILE" ]; then
     # File exists, import its content to RUNNER_TOKEN
@@ -26,7 +25,7 @@ echo "Token: $RUNNER_TOKEN"
 
 #./config.sh remove --unattended --token "${RUNNER_TOKEN}" --name "$RUNNER_NAME"
 
-./config.sh --url "https://github.com/$OWNER/$REPO" --token "$RUNNER_TOKEN" --name "$RUNNER_NAME" --unattended --label "ubuntu:latest $RUNNER_LABEL"
+./config.sh --url "https://github.com/$OWNER/$REPO" --token "$RUNNER_TOKEN" --name "$RUNNER_NAME" --unattended --label "ubuntu:latest $LABEL"
 
 cleanup() {
     echo "Removing runner..."
